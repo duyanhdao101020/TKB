@@ -122,26 +122,36 @@ function inRanges(w, ranges){
 
 // day: 0=Mon ... 6=Sun
 const COURSES = [
-  {day:1, name:"汉语要素教学", time:"08:00–12:00 (tiết 1–5)", room:"05-120",
-   segs:[{weeks:[[6,8],[9,9]], teacher:"丁婵婵"}, {weeks:[[10,14]], teacher:"常新茹"}]},
-  {day:3, name:"汉语要素教学", time:"14:45–17:10 (tiết 7–9)", room:"05-120 / 05-220",
-   segs:[{weeks:[[6,9]], teacher:"林源", room:"05-220"}, {weeks:[[10,13]], teacher:"毛力群", room:"05-120"}]},
-  {day:1, name:"微格教学 (3班)", time:"14:45–17:10 (tiết 7–9)", room:"16-311",
-   segs:[{weeks:[[10,18]], teacher:"鲍蕊"}]},
-  {day:0, name:"中华文化国际传播", time:"18:00–20:20 (tiết 10–12)", room:"17-135",
-   segs:[{weeks:[[6,11]], teacher:"徐从辉"}, {weeks:[[12,17]], teacher:"宣炳善"}]},
-  {day:1, name:"国际中文教育数智化", time:"10:35–12:00 (tiết 4–5)", room:"26-215",
-   segs:[{weeks:[[6,17]], teacher:"赵润泽"}]},
-  {day:2, name:"中国概况", time:"18:00–19:25 (tiết 10–11)", room:"26-101",
-   segs:[{weeks:[[6,17]], teacher:"郑崧"}]},
-  {day:5, name:"教育原理", time:"09:40–12:00 (tiết 3–5)", room:"",
+  {day:2, name:"汉语要素教学",
    segs:[
-     {weeks:[[3,4],[6,7],[9,10],[12,13],[16,19]], teacher:"蔡群青", mode:"online", room:"Trực tuyến — zhihuishu.com (智慧树)", link:"https://www.zhihuishu.com"},
-     {weeks:[[5,5],[8,8],[11,11],[14,15]], teacher:"蔡群青", mode:"offline", room:"Trực tiếp — phòng 16-531"}
+     {weeks:[[6,8]], teacher:"丁婵婵", room:"05-120", time:"08:45–12:00 (tiết 2–5)"},
+     {weeks:[[9,9]], teacher:"丁婵婵", room:"05-120", time:"08:45–11:15 (tiết 2–4)"},
+     {weeks:[[10,14]], teacher:"常新茹", room:"05-120", time:"09:40–12:00 (tiết 3–5)"}
+   ]},
+  {day:3, name:"汉语要素教学",
+   segs:[
+     {weeks:[[6,9]], teacher:"林源", room:"05-220", time:"14:45–17:10 (tiết 7–9)"},
+     {weeks:[[10,13]], teacher:"毛力群", room:"05-120", time:"14:45–17:10 (tiết 7–9)"}
+   ]},
+  {day:2, name:"微格教学 (3班)",
+   segs:[{weeks:[[10,18]], teacher:"鲍蕊", room:"16-311", time:"14:00–17:10 (tiết 6–9)"}]},
+  {day:1, name:"国际中文教育数智化",
+   segs:[{weeks:[[6,17]], teacher:"赵润泽", room:"26-215", time:"09:40–12:00 (tiết 3–5)"}]},
+  {day:1, name:"中华文化国际传播",
+   segs:[
+     {weeks:[[6,11]], teacher:"徐从辉", room:"17-135", time:"18:00–20:20 (tiết 10–12)"},
+     {weeks:[[12,17]], teacher:"宣炳善", room:"17-135", time:"18:00–20:20 (tiết 10–12)"}
+   ]},
+  {day:2, name:"中国概况",
+   segs:[{weeks:[[6,17]], teacher:"郑崧", room:"26-101", time:"18:00–20:20 (tiết 10–12)"}]},
+  {day:5, name:"教育原理",
+   segs:[
+     {weeks:[[3,4],[6,7],[9,10],[12,13],[16,19]], teacher:"蔡群青", mode:"online", room:"Trực tuyến — zhihuishu.com (智慧树)", link:"https://www.zhihuishu.com", time:"09:40–11:15 (tiết 3–4)"},
+     {weeks:[[5,5],[8,8],[11,11],[14,15]], teacher:"蔡群青", mode:"offline", room:"Trực tiếp — phòng 16-531", time:"09:40–11:15 (tiết 3–4)"}
    ]},
 ];
 
-const DAY_NAMES = ["Thứ Hai","Thứ Ba","Thứ Tư","Thứ Năm","Thứ Sáu","Thứ Bảy","Chủ Nhật"];
+const DAY_NAMES = ["星期一","星期二","星期三","星期四","星期五","星期六","星期日"];
 
 let currentWeek = weekOf(new Date());
 if(currentWeek < 1) currentWeek = 1;
@@ -184,7 +194,7 @@ function render(){
             : (seg.mode === "offline" ? '<span class="badge" style="background:#4c7a4c;">🏫 TRỰC TIẾP</span>' : '');
           item.innerHTML =
             '<div class="cname">'+c.name+'</div>'+
-            '<div class="cmeta">'+modeBadge+'<span class="badge">'+c.time+'</span><br>'+roomHtml+' · '+seg.teacher+'</div>';
+            '<div class="cmeta">'+modeBadge+'<span class="badge">'+seg.time+'</span><br>'+roomHtml+' · '+seg.teacher+'</div>';
           dayDiv.appendChild(item);
         }
       });
